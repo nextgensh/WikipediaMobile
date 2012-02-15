@@ -131,6 +131,8 @@ window.chrome = function() {
 			initContentLinkHandlers();
 			chrome.loadFirstPage();
 			doFocusHack();
+			/* Populate the list of languages used in the settings page. */
+			appSettings.loadLangSettings();
 		});
 		
 	}

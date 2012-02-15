@@ -3,7 +3,6 @@ window.appSettings = function() {
 	var locales = [];
 
 	function showSettings(callback) {
-		var requestUrl = "https://en.wikipedia.org/w/api.php?action=sitematrix&format=json";
 
 		if(fontSizes.length == 0) {
 			fontSizes = [
@@ -12,7 +11,20 @@ window.appSettings = function() {
 				{value: '125%', name: mw.message('settings-font-size-larger').plain() }
 			];
 		}
+			
+		/* We still check if the locales is blank. If it is blank we
+		 * force a call to the loadLangSettings function. */
+		if(locales.length==0){
+			appSettings.loadLangSettings();
+		}
+		renderSettings();
+	}
 
+	/* Method which populates language codes from the JSON object. */
+	function loadLangSettings(){
+		var requestUrl = "https://en.wikipedia.org/w/api.php?action=sitematrix&format=json";
+
+		console.log("--------->Time to do something");
 		if(locales.length == 0) {
 			$.ajax({
 				type:'GET', 
@@ -32,11 +44,11 @@ window.appSettings = function() {
 							}
 						}
 					});
-					renderSettings();
+					/* Silence is golden */
 				}
 			});
 		} else {
-			renderSettings();
+			/* Silence is golden */
 		}
 
 	}
@@ -80,6 +92,7 @@ window.appSettings = function() {
 	}
 
 	return {
-		showSettings: showSettings
+		showSettings: showSettings,
+		loadLangSettings: loadLangSettings
 	};
 }();
