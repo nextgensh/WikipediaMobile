@@ -24,7 +24,6 @@ window.appSettings = function() {
 	function loadLangSettings(){
 		var requestUrl = "https://en.wikipedia.org/w/api.php?action=sitematrix&format=json";
 
-		console.log("--------->Time to do something");
 		if(locales.length == 0) {
 			$.ajax({
 				type:'GET', 
